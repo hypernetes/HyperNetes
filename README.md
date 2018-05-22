@@ -1,6 +1,6 @@
 <div align="center">
   <a>
-    <img height="250" width="250" src="https://cdn.rawgit.com/fabrikube/FabriKube/master/fabricKube_logo.svg">
+    <img height="250" width="250" src="https://cdn.rawgit.com/alesiladas/FabriKube/master/fabricKube_logo1.svg">
   </a>
 
   ## FabriKube                                                                                                        
