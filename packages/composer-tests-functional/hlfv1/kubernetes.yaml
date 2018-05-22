@@ -1,0 +1,653 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    service: ca.org1.example.com
+  name: ca.org1.example.com
+spec:
+  ports:
+  - name: "7054"
+    port: 7054
+    targetPort: 7054
+  selector:
+    service: ca.org1.example.com
+status:
+  loadBalancer: {}
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    service: ca.org1.example.com
+  name: ca.org1.example.com
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: ca.org1.example.com
+    spec:
+      containers:
+      - args:
+        - sh
+        - -c
+        - fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem
+          --ca.keyfile /etc/hyperledger/fabric-ca-server-config/key.pem -b admin:adminpw
+          -d
+        env:
+        - name: FABRIC_CA_HOME
+          value: /etc/hyperledger/fabric-ca-server
+        - name: FABRIC_CA_SERVER_CA_NAME
+          value: ca.org1.example.com
+        image: hyperledger/fabric-ca:$ARCH--1.1.0
+        name: ca.org1.example.com
+        ports:
+        - containerPort: 7054
+        resources: {}
+        volumeMounts:
+        - mountPath: ./crypto-config/peerOrganizations/org1.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
+          name: ca.org1.example.com-claim0
+      restartPolicy: Always
+      volumes:
+      - name: ca.org1.example.com-claim0
+        persistentVolumeClaim:
+          claimName: ca.org1.example.com-claim0
+status: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    service: ca.org1.example.com-claim0
+  name: ca.org1.example.com-claim0
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    service: ca.org2.example.com
+  name: ca.org2.example.com
+spec:
+  ports:
+  - name: "8054"
+    port: 8054
+    targetPort: 7054
+  selector:
+    service: ca.org2.example.com
+status:
+  loadBalancer: {}
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    service: ca.org2.example.com
+  name: ca.org2.example.com
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: ca.org2.example.com
+    spec:
+      containers:
+      - args:
+        - sh
+        - -c
+        - fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org2.example.com-cert.pem
+          --ca.keyfile /etc/hyperledger/fabric-ca-server-config/key.pem -b admin:adminpw
+          -d
+        env:
+        - name: FABRIC_CA_HOME
+          value: /etc/hyperledger/fabric-ca-server
+        - name: FABRIC_CA_SERVER_CA_NAME
+          value: ca.org2.example.com
+        image: hyperledger/fabric-ca:$ARCH-1.1.0
+        name: ca.org2.example.com
+        ports:
+        - containerPort: 7054
+        resources: {}
+        volumeMounts:
+        - mountPath: ./crypto-config/peerOrganizations/org2.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
+          name: ca.org2.example.com-claim0
+      restartPolicy: Always
+      volumes:
+      - name: ca.org2.example.com-claim0
+        persistentVolumeClaim:
+          claimName: ca.org2.example.com-claim0
+status: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    service: ca.org2.example.com-claim0
+  name: ca.org2.example.com-claim0
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    service: couchdb.org1.example.com
+  name: couchdb.org1.example.com
+spec:
+  ports:
+  - name: "5984"
+    port: 5984
+    targetPort: 5984
+  selector:
+    service: couchdb.org1.example.com
+status:
+  loadBalancer: {}
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    service: couchdb.org1.example.com
+  name: couchdb.org1.example.com
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: couchdb.org1.example.com
+    spec:
+      containers:
+      - env:
+        - name: DB_URL
+          value: http://localhost:5984/member_db
+        image: hyperledger/fabric-couchdb:$ARCH-0.4.6
+        name: couchdb.org1.example.com
+        ports:
+        - containerPort: 5984
+        resources: {}
+      restartPolicy: Always
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    service: couchdb.org2.example.com
+  name: couchdb.org2.example.com
+spec:
+  ports:
+  - name: "6984"
+    port: 6984
+    targetPort: 5984
+  selector:
+    service: couchdb.org2.example.com
+status:
+  loadBalancer: {}
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    service: couchdb.org2.example.com
+  name: couchdb.org2.example.com
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: couchdb.org2.example.com
+    spec:
+      containers:
+      - env:
+        - name: DB_URL
+          value: http://localhost:5984/member_db
+        image: hyperledger/fabric-couchdb:$ARCH-0.4.6
+        name: couchdb.org2.example.com
+        ports:
+        - containerPort: 5984
+        resources: {}
+      restartPolicy: Always
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    service: orderer.example.com
+  name: orderer.example.com
+spec:
+  ports:
+  - name: "7050"
+    port: 7050
+    targetPort: 7050
+  selector:
+    service: orderer.example.com
+status:
+  loadBalancer: {}
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    service: orderer.example.com
+  name: orderer.example.com
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: orderer.example.com
+    spec:
+      containers:
+      - args:
+        - orderer
+        env:
+        - name: ORDERER_GENERAL_GENESISFILE
+          value: /etc/hyperledger/configtx/composer-genesis.block
+        - name: ORDERER_GENERAL_GENESISMETHOD
+          value: file
+        - name: ORDERER_GENERAL_LISTENADDRESS
+          value: 0.0.0.0
+        - name: ORDERER_GENERAL_LOCALMSPDIR
+          value: /etc/hyperledger/msp/orderer/msp
+        - name: ORDERER_GENERAL_LOCALMSPID
+          value: OrdererMSP
+        - name: ORDERER_GENERAL_LOGLEVEL
+          value: debug
+        image: hyperledger/fabric-orderer:$ARCH-1.1.0
+        name: orderer.example.com
+        ports:
+        - containerPort: 7050
+        resources: {}
+        volumeMounts:
+        - mountPath: ./:/etc/hyperledger/configtx
+          name: orderer.example.com-claim0
+        - mountPath: ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp:/etc/hyperledger/msp/orderer/msp
+          name: orderer.example.com-claim1
+        workingDir: /opt/gopath/src/github.com/hyperledger/fabric
+      restartPolicy: Always
+      volumes:
+      - name: orderer.example.com-claim0
+        persistentVolumeClaim:
+          claimName: orderer.example.com-claim0
+      - name: orderer.example.com-claim1
+        persistentVolumeClaim:
+          claimName: orderer.example.com-claim1
+status: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    service: orderer.example.com-claim0
+  name: orderer.example.com-claim0
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    service: orderer.example.com-claim1
+  name: orderer.example.com-claim1
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    service: peer0.org1.example.com
+  name: peer0.org1.example.com
+spec:
+  ports:
+  - name: "7051"
+    port: 7051
+    targetPort: 7051
+  - name: "7053"
+    port: 7053
+    targetPort: 7053
+  selector:
+    service: peer0.org1.example.com
+status:
+  loadBalancer: {}
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    service: peer0.org1.example.com
+  name: peer0.org1.example.com
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: peer0.org1.example.com
+    spec:
+      containers:
+      - args:
+        - peer
+        - node
+        - start
+        env:
+        - name: CORE_CHAINCODE_LOGGING_LEVEL
+          value: DEBUG
+        - name: CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS
+          value: couchdb.org1.example.com:5984
+        - name: CORE_LEDGER_STATE_STATEDATABASE
+          value: CouchDB
+        - name: CORE_LOGGING_PEER
+          value: debug
+        - name: CORE_PEER_ADDRESS
+          value: peer0.org1.example.com:7051
+        - name: CORE_PEER_ID
+          value: peer0.org1.example.com
+        - name: CORE_PEER_LOCALMSPID
+          value: Org1MSP
+        - name: CORE_PEER_MSPCONFIGPATH
+          value: /etc/hyperledger/peer/msp
+        - name: CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE
+          value: hlfv1_default
+        - name: CORE_VM_ENDPOINT
+          value: unix:///host/var/run/docker.sock
+        image: hyperledger/fabric-peer:$ARCH-1.1.0
+        name: peer0.org1.example.com
+        ports:
+        - containerPort: 7051
+        - containerPort: 7053
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/run/:/host/var/run/
+          name: peer0.org1.example.com-claim0
+        - mountPath: ./:/etc/hyperledger/configtx
+          name: peer0.org1.example.com-claim1
+        - mountPath: ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp:/etc/hyperledger/peer/msp
+          name: peer0.org1.example.com-claim2
+        - mountPath: ./crypto-config/peerOrganizations/org1.example.com/users:/etc/hyperledger/msp/users
+          name: peer0.org1.example.com-claim3
+        workingDir: /opt/gopath/src/github.com/hyperledger/fabric
+      restartPolicy: Always
+      volumes:
+      - name: peer0.org1.example.com-claim0
+        persistentVolumeClaim:
+          claimName: peer0.org1.example.com-claim0
+      - name: peer0.org1.example.com-claim1
+        persistentVolumeClaim:
+          claimName: peer0.org1.example.com-claim1
+      - name: peer0.org1.example.com-claim2
+        persistentVolumeClaim:
+          claimName: peer0.org1.example.com-claim2
+      - name: peer0.org1.example.com-claim3
+        persistentVolumeClaim:
+          claimName: peer0.org1.example.com-claim3
+status: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    service: peer0.org1.example.com-claim0
+  name: peer0.org1.example.com-claim0
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    service: peer0.org1.example.com-claim1
+  name: peer0.org1.example.com-claim1
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    service: peer0.org1.example.com-claim2
+  name: peer0.org1.example.com-claim2
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    iservice: peer0.org1.example.com-claim3
+  name: peer0.org1.example.com-claim3
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    service: peer0.org2.example.com
+  name: peer0.org2.example.com
+spec:
+  ports:
+  - name: "8051"
+    port: 8051
+    targetPort: 7051
+  - name: "8053"
+    port: 8053
+    targetPort: 7053
+  selector:
+    service: peer0.org2.example.com
+status:
+  loadBalancer: {}
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+  creationTimestamp: null
+  labels:
+    service: peer0.org2.example.com
+  name: peer0.org2.example.com
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: peer0.org2.example.com
+    spec:
+      containers:
+      - args:
+        - peer
+        - node
+        - start
+        env:
+        - name: CORE_CHAINCODE_LOGGING_LEVEL
+          value: DEBUG
+        - name: CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS
+          value: couchdb.org2.example.com:5984
+        - name: CORE_LEDGER_STATE_STATEDATABASE
+          value: CouchDB
+        - name: CORE_LOGGING_PEER
+          value: debug
+        - name: CORE_PEER_ADDRESS
+          value: peer0.org2.example.com:7051
+        - name: CORE_PEER_ID
+          value: peer0.org2.example.com
+        - name: CORE_PEER_LOCALMSPID
+          value: Org2MSP
+        - name: CORE_PEER_MSPCONFIGPATH
+          value: /etc/hyperledger/peer/msp
+        - name: CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE
+          value: hlfv1_default
+        - name: CORE_VM_ENDPOINT
+          value: unix:///host/var/run/docker.sock
+        image: hyperledger/fabric-peer:$ARCH-1.1.0
+        name: peer0.org2.example.com
+        ports:
+        - containerPort: 7051
+        - containerPort: 7053
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/run/:/host/var/run/
+          name: peer0.org2.example.com-claim0
+        - mountPath: ./:/etc/hyperledger/configtx
+          name: peer0.org2.example.com-claim1
+        - mountPath: ./crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/msp:/etc/hyperledger/peer/msp
+          name: peer0.org2.example.com-claim2
+        - mountPath: ./crypto-config/peerOrganizations/org2.example.com/users:/etc/hyperledger/msp/users
+          name: peer0.org2.example.com-claim3
+        workingDir: /opt/gopath/src/github.com/hyperledger/fabric
+      restartPolicy: Always
+      volumes:
+      - name: peer0.org2.example.com-claim0
+        persistentVolumeClaim:
+          claimName: peer0.org2.example.com-claim0
+      - name: peer0.org2.example.com-claim1
+        persistentVolumeClaim:
+          claimName: peer0.org2.example.com-claim1
+      - name: peer0.org2.example.com-claim2
+        persistentVolumeClaim:
+          claimName: peer0.org2.example.com-claim2
+      - name: peer0.org2.example.com-claim3
+        persistentVolumeClaim:
+          claimName: peer0.org2.example.com-claim3
+status: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    service: peer0.org2.example.com-claim0
+  name: peer0.org2.example.com-claim0
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    service: peer0.org2.example.com-claim1
+  name: peer0.org2.example.com-claim1
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    service: peer0.org2.example.com-claim2
+  name: peer0.org2.example.com-claim2
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    service: peer0.org2.example.com-claim3
+  name: peer0.org2.example.com-claim3
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
