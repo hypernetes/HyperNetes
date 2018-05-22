@@ -1,42 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 21.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 388.9 430" style="enable-background:new 0 0 388.9 430;" xml:space="preserve">
+	 viewBox="0 0 471 458" style="enable-background:new 0 0 471 458;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:url(#SVGID_1_);}
-	.st1{fill:none;stroke:#000000;stroke-miterlimit:10;}
+	.st1{fill:none;stroke:#000000;stroke-width:3;stroke-miterlimit:10;}
 	.st2{fill:#00C3DF;}
 	.st3{fill:url(#SVGID_2_);}
-	.st4{fill:none;stroke:#00CFED;stroke-miterlimit:10;}
-	.st5{fill:none;stroke:#000000;stroke-miterlimit:10;stroke-dasharray:12,5;}
+	.st4{fill:none;stroke:#000000;stroke-width:3;stroke-miterlimit:10;stroke-dasharray:12,5;}
 </style>
 <title>fabricKube_logo</title>
-<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="55.95" y1="180.42" x2="444.05" y2="180.42" gradientTransform="matrix(1 0 0 -1 -55.45 395.47)">
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="96.45" y1="125.02" x2="484.55" y2="125.02" gradientTransform="matrix(1 0 0 -1 -55.45 353.47)">
 	<stop  offset="0" style="stop-color:#3DDEED"/>
 	<stop  offset="1" style="stop-color:#3DDEED;stop-opacity:0"/>
 </linearGradient>
-<polygon class="st0" points="196.3,0.6 2.4,106.3 0.5,320.8 192.6,429.5 386.7,323.8 388.6,109.5 "/>
-<polygon class="st1" points="196.3,0.6 2.4,106.3 0.5,320.8 192.6,429.5 386.7,323.8 388.6,109.5 "/>
-<polygon class="st2" points="196.1,73.8 69,141.8 67.4,280.6 192.8,351.3 320.1,283.3 321.7,144.5 "/>
-<polygon class="st1" points="196.1,73.8 69,141.8 67.4,280.6 192.8,351.3 320.1,283.3 321.7,144.5 "/>
-<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="180.15" y1="182.92" x2="319.65" y2="182.92" gradientTransform="matrix(1 0 0 -1 -55.45 395.47)">
+<polygon class="st0" points="236.8,14 42.9,119.7 41,334.2 233.1,442.9 427.2,337.2 429.1,122.9 "/>
+<polygon class="st1" points="236.8,14 42.9,119.7 41,334.2 233.1,442.9 427.2,337.2 429.1,122.9 "/>
+<polygon class="st2" points="236.6,87.2 109.5,155.2 107.9,294 233.3,364.7 360.6,296.7 362.2,157.9 "/>
+<polygon class="st1" points="236.6,87.2 109.5,155.2 107.9,294 233.3,364.7 360.6,296.7 362.2,157.9 "/>
+<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="220.65" y1="127.52" x2="360.15" y2="127.52" gradientTransform="matrix(1 0 0 -1 -55.45 353.47)">
 	<stop  offset="0" style="stop-color:#3DDEED"/>
 	<stop  offset="1" style="stop-color:#3DDEED;stop-opacity:0"/>
 </linearGradient>
-<polygon class="st3" points="194.5,136 124.7,174.3 124.7,250.8 194.5,289.1 264.2,251 264.2,174.3 "/>
-<polygon class="st1" points="194.5,136 124.7,174.3 124.7,250.8 194.5,289.1 264.2,251 264.2,174.3 "/>
-<line class="st1" x1="264.2" y1="174.3" x2="194.5" y2="212.6"/>
-<line class="st1" x1="194.5" y1="289.1" x2="194.5" y2="212.6"/>
-<line class="st1" x1="194.5" y1="212.6" x2="124.7" y2="174.3"/>
-<line class="st4" x1="388.9" y1="344.7" x2="388.3" y2="344.7"/>
-<line class="st1" x1="124.7" y1="250.8" x2="67.4" y2="280.6"/>
-<line class="st1" x1="320.1" y1="283.3" x2="264.2" y2="251"/>
-<line class="st1" x1="124.7" y1="174.3" x2="69" y2="141.8"/>
-<line class="st1" x1="321.7" y1="144.5" x2="264.2" y2="174.3"/>
-<line class="st5" x1="388.6" y1="108.2" x2="321.7" y2="144.5"/>
-<line class="st5" x1="386.7" y1="320.1" x2="320.1" y2="283.3"/>
-<line class="st5" x1="194.5" y1="289.1" x2="192.6" y2="424.5"/>
-<line class="st5" x1="67.4" y1="280.6" x2="0.5" y2="317.1"/>
-<line class="st5" x1="69" y1="141.8" x2="2.4" y2="105"/>
-<line class="st5" x1="196.3" y1="0.6" x2="194.5" y2="136"/>
+<polygon class="st3" points="235,149.4 165.2,187.7 165.2,264.2 235,302.5 304.7,264.4 304.7,187.7 "/>
+<polygon class="st1" points="235,149.4 165.2,187.7 165.2,264.2 235,302.5 304.7,264.4 304.7,187.7 "/>
+<line class="st1" x1="304.7" y1="187.7" x2="235" y2="226"/>
+<line class="st1" x1="235" y1="302.5" x2="235" y2="226"/>
+<line class="st1" x1="235" y1="226" x2="165.2" y2="187.7"/>
+<line class="st1" x1="165.2" y1="264.2" x2="107.9" y2="294"/>
+<line class="st1" x1="360.6" y1="296.7" x2="304.7" y2="264.4"/>
+<line class="st1" x1="165.2" y1="187.7" x2="109.5" y2="155.2"/>
+<line class="st1" x1="362.2" y1="157.9" x2="304.7" y2="187.7"/>
+<line class="st4" x1="429.1" y1="121.6" x2="362.2" y2="157.9"/>
+<line class="st4" x1="427.2" y1="333.5" x2="360.6" y2="296.7"/>
+<line class="st4" x1="235" y1="302.5" x2="233.1" y2="437.9"/>
+<line class="st4" x1="107.9" y1="294" x2="41" y2="330.5"/>
+<line class="st4" x1="109.5" y1="155.2" x2="42.9" y2="118.4"/>
+<line class="st4" x1="236.8" y1="14" x2="235" y2="149.4"/>
 </svg>
