@@ -108,9 +108,10 @@ sudo usermod -aG docker $(whoami)
 
 # Install docker compose
 echo "# Installing Kubectl"
-sudo curl -L "https://github.com/docker/compose/releases/download/1.13.0/docker-compose-$(uname -s)-$(uname -m)" \
-    -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+sudo curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/darwin/amd64/kubectl" \
+    -o /usr/local/bin/kubectl
+sudo chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
 
 # Install python v2 if required
 set +e
@@ -133,8 +134,8 @@ echo -n 'npm:            '
 npm --version
 echo -n 'Docker:         '
 docker --version
-echo -n 'Docker Compose: '
-docker-compose --version
+echo -n 'Kubectl: '
+kubectl version
 echo -n 'Python:         '
 python -V
 
