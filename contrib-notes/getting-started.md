@@ -27,7 +27,7 @@ This is a summary of the tools that will be required to work on Hyperledger Comp
 - **Git** This is probably already installed on most Linux machines. Setup is well documented on the [ibm.git website](https://help.github.com/enterprise/2.7/user/articles/set-up-git/) . Pay particular attention to[ setting up the SSL keys](https://help.github.com/enterprise/2.7/user/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#platform-linux) that are required.
 
 - **Docker** Essential for the running of the tests and for running the HyperLedger Fabric.
-    - Ubuntu: Firstly the Docker Engine needs to be [installed](https://docs.docker.com/engine/installation/linux/ubuntulinux/), then the [docker-compose tool](https://docs.docker.com/compose/install/) is required with these instructions. Some initial notes on administering docker are [here](https://docs.docker.com/engine/admin/)
+    - Ubuntu: Firstly the Docker Engine needs to be [installed](https://docs.docker.com/engine/installation/linux/ubuntulinux/), then the [kubectl](https://docs.docker.com/compose/install/) is required with these instructions. Some initial notes on administering docker are [here](https://docs.docker.com/engine/admin/)
 
 - **Node.js v8.9 or higher (but not node v9)** The main runtime of Hyperledger Composer and also has the NPM tool that is used for a lot of the package management.
     - Ubuntu: Simply installed [follow these notes](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions).

@@ -1,6 +1,6 @@
 <div align="center">
   <a>
-    <img height="250" width="250" src="https://raw.githubusercontent.com/alesiladas/FabriKube/master/fabricKube_logo.sv">
+    <img height="250" width="250" src="https://raw.githubusercontent.com/alesiladas/FabriKube/master/fabricKube_logo.svg">
   </a>
 
   ## FabriKube                                                                                                        
@@ -10,14 +10,8 @@
 </div>
 
 # Quick Overview
-```
-fabrikube create #create deployment templates for Kubernetes
-```
-This is all you need to do to generate deployment templates for Kubernetes in the desired directory. 
 
-# Stepwise Guide
-
-
+FabriKube is a rewrite of Hyperledger Composer. Rather than managing docker images through Docker Compose, FabriKube supports Kubernetes. 
 
 # Getting in touch
 We would love to hear what you think about FabriKube! Please feel free to contact us if interested in contributing.

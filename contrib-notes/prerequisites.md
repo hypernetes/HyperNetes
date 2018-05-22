@@ -6,7 +6,7 @@ Automatic installations scripts are available for [Ubuntu](./prerequisites-ubunt
 
 The recommended *minimum* versions are:
 - *Docker*: v17.03
-- *Docker-compose*: v1.13.0
+- *Kubectl*: client: v1.10.1, server: v1.10.0
 - *npm*: v5.5.1
 - *node.js*: v8.9.1
 
@@ -25,10 +25,10 @@ The Docker Engine is essential for running system tests and running the HyperLed
 
 [Official Docker Engine Installation Guide](https://docs.docker.com/engine/installation/)
 
-### 4. Installing Docker Compose
-[Docker Compose](https://docs.docker.com/compose/overview/) is used for easily configuring and starting HyperLedger Fabric.
+### 4. Installing Kubectl
+[Kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) is used for easily configuring and starting HyperLedger Fabric.
 
-[Official Docker Compose Installation guide](https://docs.docker.com/compose/install/)
+[Official Kubectl Installation guide](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
 ### 5. Installing Git
 This is probably already installed on most Linux machines. Pay particular attention to [setting up the SSL keys](https://help.github.com/enterprise/2.7/user/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#platform-linux) that are required.

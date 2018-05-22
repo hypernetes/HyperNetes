@@ -4,33 +4,9 @@ The essential tools you will need are *npm*, *docker*, *docker-compose* and a co
 
 The recommended *minimum* versions are:
 - *Docker*: v17.03
-- *Docker-compose*: v1.13.0
+- *Kubectl*: client: v1.10.1, server: v1.10.0
 - *npm*: v5.5.1
 - *node.js*: v8.9.1
-
-
-## Installation for Ubuntu
-
-### 1. Installing Runtime Components
-Supported versions of Ubuntu are: Trusty, Xenial and Yakkety. There is an automated installation script that will install *node* *docker* *docker-compose*.  For Trusty, additional kernel packages that allow the use of the AUFS storage driver required by Docker, will also be installed.
-
-If some of the tools are already installed or to do the installation step-by-step follow the [manual instructions](./manual_prerequisites.md).
-
-
-```bash
-$ curl -O https://hyperledger.github.io/composer/prereqs-ubuntu.sh
-$ chmod u+x prereqs-ubuntu.sh
-```
-
-Next run the script - as this uses sudo you will be prompted for your password.
-
-```bash
-$ ./prereqs-ubuntu.sh
-```
-
-**Important:** You will need to logout and login again before continuing.
-
-The script will print out the versions installed
 
 ### 2. Installing Git
 This is probably already installed on most Linux machines. Pay particular attention to [setting up the SSL keys](https://help.github.com/enterprise/2.7/user/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#platform-linux) that are required.
