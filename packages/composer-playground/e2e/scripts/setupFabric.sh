@@ -33,7 +33,7 @@ export COMPOSER_PORT_WAIT_SECS=30
 export COMPOSER_DEPLOY_WAIT_SECS=500
 export COMPOSER_TIMEOUT_SECS=500
 
-DOCKER_FILE=${DIR}/fabric/hlfv1/docker-compose.yml
+KUBERNETES_FILE=${DIR}/fabric/hlfv1/kubernetes.yml
 
 docker pull hyperledger/fabric-peer:$ARCH-1.1.0
 docker pull hyperledger/fabric-ca:$ARCH-1.1.0
@@ -54,11 +54,11 @@ for KEY in $(find crypto-config -type f -name "*_sk"); do
     mv ${KEY} ${KEY_DIR}/key.pem
 done
 
-echo Using docker file ${DOCKER_FILE}
-ARCH=$ARCH docker-compose -f ${DOCKER_FILE} kill
-ARCH=$ARCH docker-compose -f ${DOCKER_FILE} down
+echo Using kubernetes file ${KUBERNETES_FILE}
+ARCH=$ARCH kubectl delete -f ${KUBERNETES_FILE}
+ARCH=$ARCH kubectl -f ${KUBERNETES_FILE} delete pods --all
 docker rmi -f $(docker images -aq dev-*) || true
-ARCH=$ARCH docker-compose -f ${DOCKER_FILE} up -d
+ARCH=$ARCH kubectl create -f ${KUBERNETES_FILE}
 
 # wait for the fabric to start
 sleep 10

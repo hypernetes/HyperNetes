@@ -58,7 +58,7 @@ docker kill $(docker ps -q) && docker rm $(docker ps -qa) --force
 
 
 rm -rf ${HOME}/.npmrc
-if [ "${DOCKER_FILE}" != "" ]; then
+if [ "${KUBERNETES_FILE}" != "" ]; then
     cd ../composer-runtime-hlfv1
     rm /tmp/npmrc
     cd "${DIR}"
@@ -86,9 +86,9 @@ for INTEST in $(echo ${INTEST} | tr "," " "); do
     # Pull any required Docker images.
     if [[ ${INTEST} == hlfv1* ]]; then
         if [[ ${INTEST} == *tls ]]; then
-            DOCKER_FILE=${DIR}/hlfv1/docker-compose.tls.yml
+            KUBERNETES_FILE=${DIR}/hlfv1/kubernetes.tls.yaml
         else
-            DOCKER_FILE=${DIR}/hlfv1/docker-compose.yml
+            KUBERNETES_FILE=${DIR}/hlfv1/kubernetes.yaml
         fi
         docker pull hyperledger/fabric-peer:$ARCH-1.1.0
         docker pull hyperledger/fabric-ca:$ARCH-1.1.0
@@ -108,12 +108,12 @@ for INTEST in $(echo ${INTEST} | tr "," " "); do
     fi
 
     # Start any required Docker images.
-    if [ "${DOCKER_FILE}" != "" ]; then
-        echo Using docker file ${DOCKER_FILE}
-        ARCH=$ARCH docker-compose -f ${DOCKER_FILE} kill
-        ARCH=$ARCH docker-compose -f ${DOCKER_FILE} down
+    if [ "${KUBERNETES_FILE}" != "" ]; then
+        echo Using docker file ${KUBERNETES_FILE}
+        ARCH=$ARCH kubectl delete -f ${KUBERNETES_FILE}
+        ARCH=$ARCH kubectl -f ${KUBERNETES_FILE} delete pods --all
         docker rmi -f $(docker images -aq dev-*) || true
-        ARCH=$ARCH docker-compose -f ${DOCKER_FILE} up -d
+        ARCH=$ARCH kubectl -f ${KUBERNETES_FILE} up -d
         cd ${DIR}
         cd ../composer-runtime-hlfv1
         if [ `uname` = "Darwin" ]; then
@@ -181,9 +181,9 @@ for INTEST in $(echo ${INTEST} | tr "," " "); do
     npm run stop_ldap
 
     # Kill and remove any started Docker images.
-    if [ "${DOCKER_FILE}" != "" ]; then
-        ARCH=$ARCH docker-compose -f ${DOCKER_FILE} kill
-        ARCH=$ARCH docker-compose -f ${DOCKER_FILE} down
+    if [ "${KUBERNETES_FILE}" != "" ]; then
+        ARCH=$ARCH kubectl delete -f ${KUBERNETES_FILE}
+        ARCH=$ARCH kubectl -f ${KUBERNETES_FILE} delete pods --all
         docker rmi -f $(docker images -aq dev-*) || true
     fi
 
@@ -211,7 +211,7 @@ for INTEST in $(echo ${INTEST} | tr "," " "); do
     rm -rf ${HOME}/.npmrc
     rm -f ./networkadmin.card
     rm -f ./composer-report-*
-    if [ "${DOCKER_FILE}" != "" ]; then
+    if [ "${KUBERNETES_FILE}" != "" ]; then
         cd ../composer-runtime-hlfv1
         rm /tmp/npmrc
         cd "${DIR}"

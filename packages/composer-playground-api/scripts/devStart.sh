@@ -31,7 +31,7 @@ fi
 echo "registry=http://${gateway}:4873" > "${NPMRC_FILE}"
 
 # Start the npm proxy
-docker-compose --file "${scriptDir}/docker-compose.yaml" up --detach
+kubectl proxy --port=4873
 
 # Publish development versions of packages required at runtime
 for package in composer-common composer-runtime composer-runtime-hlfv1; do
@@ -42,4 +42,4 @@ done
 npm start
 
 # Stop the npm proxy
-docker-compose --file "${scriptDir}/docker-compose.yaml" down
+kubectl delete pods --all

@@ -25,5 +25,5 @@ test
 # scripts directory
 scripts
 
-# docker directory
-docker
+# kubectl directory
+kubectl

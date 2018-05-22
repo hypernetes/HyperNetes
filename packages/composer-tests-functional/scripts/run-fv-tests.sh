@@ -50,9 +50,9 @@ for FVTEST in $(echo ${FVTEST} | tr "," " "); do
     # Pull any required Docker images.
     if [[ ${FVTEST} == hlfv1* ]]; then
         if [[ ${FVTEST} == *tls ]]; then
-            DOCKER_FILE=${DIR}/hlfv1/docker-compose.tls.yml
+            KUBERNETES_FILE=${DIR}/hlfv1/kubernetes.tls.yaml
         else
-            DOCKER_FILE=${DIR}/hlfv1/docker-compose.yml
+            KUBERNETES_FILE=${DIR}/hlfv1/kubernetes.yaml
         fi
         docker pull hyperledger/fabric-peer:$ARCH-1.1.0
         docker pull hyperledger/fabric-ca:$ARCH-1.1.0
@@ -74,10 +74,10 @@ for FVTEST in $(echo ${FVTEST} | tr "," " "); do
     # Start any required Docker images.
     if [ "${DOCKER_FILE}" != "" ]; then
         echo Using docker file ${DOCKER_FILE}
-        ARCH=$ARCH docker-compose -f ${DOCKER_FILE} kill
-        ARCH=$ARCH docker-compose -f ${DOCKER_FILE} down
+        ARCH=$ARCH kubectl delete -f ${KUBERNETES_FILE}
+        ARCH=$ARCH kubectl -f ${KUBERNETES_FILE} delete pods --all
         docker rmi -f $(docker images -aq dev-*) || true
-        ARCH=$ARCH docker-compose -f ${DOCKER_FILE} up -d
+        ARCH=$ARCH kubectl create -f ${KUBERNETES_FILE}
 
         cd "${DIR}"
         cd ../composer-runtime
@@ -149,8 +149,8 @@ for FVTEST in $(echo ${FVTEST} | tr "," " "); do
 
     # Kill and remove any started Docker images.
     if [ "${DOCKER_FILE}" != "" ]; then
-        ARCH=$ARCH docker-compose -f ${DOCKER_FILE} kill
-        ARCH=$ARCH docker-compose -f ${DOCKER_FILE} down
+        ARCH=$ARCH kubectl delete -f ${KUBERNETES_FILE}
+        ARCH=$ARCH kubectl -f ${KUBERNETES_FILE} delete pods --all
         docker rmi -f $(docker images -aq dev-*) || true
     fi
 

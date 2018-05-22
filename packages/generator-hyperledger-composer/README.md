@@ -80,7 +80,7 @@ configuring: composer-sample-app
    create gulpfile.js
    create index.js
    create package.json
-   create scripts/docker-compose.yml
+   create scripts/kubernetes.yaml
    create scripts/setup.sh
    create scripts/teardown.sh
    create .gitignore

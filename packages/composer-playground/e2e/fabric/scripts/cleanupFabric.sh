@@ -15,10 +15,10 @@
 # Grab the parent (root) directory.
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
-DOCKER_FILE=${DIR}/hlfv1/docker-compose.yml
+KUBERNETES_FILE=${DIR}/hlfv1/kubernetes.yaml
 
-ARCH=$ARCH docker-compose -f ${DOCKER_FILE} kill
-ARCH=$ARCH docker-compose -f ${DOCKER_FILE} down
+ARCH=$ARCH kubectl delete -f ${KUBERNETES_FILE}
+ARCH=$ARCH kubectl -f ${KUBERNETES_FILE} delete pods --all
 
 pkill verdaccio || true
 
