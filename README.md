@@ -1,6 +1,6 @@
 <div align="center">
   <a>
-    <img height="250" width="250" src="https://freeiconshop.com/wp-content/uploads/edd/checkmark-flat.png">
+<!--     <img height="250" width="250" src="https://freeiconshop.com/wp-content/uploads/edd/checkmark-flat.png"> -->
   </a>
 
   ## HyperNetes                                                                                                        
@@ -11,7 +11,7 @@
 
 # Quick Overview
 
-HyperNetes is a rewrite of Hyperledger Composer. Rather than managing docker images through Docker Compose, FabriKube supports Kubernetes. 
+HyperNetes is a rewrite of Hyperledger Composer. Rather than managing docker images through Docker Compose, HyperNetes supports Kubernetes. 
 
 # Getting in touch
 We would love to hear what you think about HyperNetes! Please feel free to contact us if interested in contributing.
